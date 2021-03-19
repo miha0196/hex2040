@@ -22,4 +22,5 @@ body {
   right: 33px;
   transform: translate(50%, -50%);
   font-weight: medium;
+  color: #999;
 }
