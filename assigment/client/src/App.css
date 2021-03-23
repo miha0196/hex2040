@@ -2,6 +2,11 @@
   font-size: 0.22em;
 }
 
+.App svg g polygon {
+  stroke: #999;
+  stroke-width: 1;
+}
+
 .App .hex-grid {
   display: flex;
   justify-content: center;
@@ -39,6 +44,10 @@
 .color-f9e3ce text,
 .color-fae7e0 text {
   fill: black;
+}
+
+.color-white {
+  fill-opacity: 0;
 }
 
 .color-f9b37b {

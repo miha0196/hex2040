@@ -5,8 +5,6 @@
     ],
     "scripts": {
         "start:client": "cd assigment/client && yarn start",
-        "start:server": "cd assigment/server && yarn rng-server",
-        "test-game": "cd assigment/server && jest --runInBand --config jest.e2e.config.js",
-        "dev:server": "cd assigment/server && yarn rng-server"
+        "start:server": "cd assigment/server && yarn rng-server"
     }
 }

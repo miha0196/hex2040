@@ -7,10 +7,25 @@ import "./App.css";
 
 export const App = () => {
   const [cellsParams, setCellsParams] = useState([]);
-  const [gridSize, setGridSize] = useState(() => window.location.hash.match(/\d+/)[0]);
+  const [gridSize, setGridSize] = useState(2);
   const [scheduled, setScheduled] = useState(true);
   const [gameStatus, setGameStatus] = useState(null);
   const selectedServer = useRef(null);
+
+  const createEmptyGrid = useCallback((gridSize) => {
+    gridSize--;
+    const hexes = [];
+
+    for (let i = -gridSize; i <= gridSize; i++) {
+      for (let j = -gridSize; j <= gridSize; j++) {
+        if (i - j < gridSize + 1 && i - j > -(gridSize + 1)) {
+          hexes.push({ x: i, y: -j, z: -i + j });
+        }
+      }
+    }
+
+    return hexes;
+  }, []);
 
   const getNewGrid = useCallback((staticAxis, magnifyingAxis, cellsParams, gridSize) => {
     let newGrid = [];
@@ -150,7 +165,6 @@ export const App = () => {
         setGameStatus("playing");
       }
 
-      console.log('1', result)
       setCellsParams([...postData, ...result]);
     }, [selectedServer, getGameStatus, gridSize]);
 
@@ -213,26 +227,10 @@ export const App = () => {
   }, [getNewGridRender]);
 
   useEffect(() => {
-    if (window.location.hash) {
-      setGridSize(window.location.hash.match(/\d+/)[0]);
-    }
-  }, []);
-
-  useEffect(() => {
     fetchCellsParams([]);
   }, [fetchCellsParams]);
 
-  const changeHashHandler = useCallback(() => {
-    fetchCellsParams([]);
-  }, [fetchCellsParams]);
-  
-  useEffect(() => {
-    window.addEventListener("hashchange", changeHashHandler);
-
-    return () => window.removeEventListener("hashchange", changeHashHandler);
-  }, [changeHashHandler]);
-
-  const changeRadiusHandler = useCallback(gridSize => window.location.hash = `test${gridSize}`, []);
+  const changeRadiusHandler = useCallback(gridSize => setGridSize(gridSize), []);
 
   return (
     <div className="App">
@@ -285,15 +283,18 @@ export const App = () => {
             spacing={1}
             origin={{ x: 0, y: 0 }}
           >
+
             {
-              cellsParams.map(({ x, y, z, value }) => (
+              createEmptyGrid(gridSize).map(({x, y, z}) => {
+                return cellsParams.filter(cell => x === cell.x && y === cell.y && z === cell.z)[0] || {x, y, z, value: 0} 
+              }).map(({ x, y, z, value }) => (
                 <Hexagon
                   q={x}
                   s={y}
                   r={z}
-                  strokeWidth={2}
                   key={`${x}-${y}-${z}`}
                   className={
+                    (value === 0 && "color-white") ||
                     (value === 2 && "color-fae7e0") ||
                     (value === 4 && "color-f9e3ce") ||
                     (value === 8 && "color-f9b37b") ||
@@ -312,20 +313,19 @@ export const App = () => {
                   }
                 >
                   <g data-x={x} data-y={y} data-z={z} data-value={value}>
-                    <Text fill="red">{`${value}`}</Text>
+                    <Text>{`${value}`}</Text>
                   </g>
-                </Hexagon>
-              ))
+                </Hexagon>))
             }
           </Layout>
         </HexGrid>
-        <GridLayout gridSize={gridSize} />
+        <GridLayout gridSize={gridSize} createdGrid={createEmptyGrid(gridSize)} />
       </div>
-      {
-        gameStatus && <div className='game-status'>
+      {gameStatus && (
+        <div className="game-status">
           Game Status: <span data-status={gameStatus}>{gameStatus}</span>
         </div>
-      }
+      )}
     </div>
   );  
 }

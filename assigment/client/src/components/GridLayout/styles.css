@@ -1,9 +1,11 @@
 .grid-layout {
   position: absolute;
+  z-index: -1;
 }
 
 .grid-layout svg g polygon {
   stroke: #999;
   stroke-width: 1;
-  fill-opacity: 0;
+  fill-opacity: 1;
+  fill: white;
 }
