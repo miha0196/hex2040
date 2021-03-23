@@ -1,0 +1,113 @@
+.App svg g text {
+  font-size: 0.22em;
+}
+
+.App .hex-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.App .options {
+  width: max-content;
+  margin: 30px auto;
+}
+
+#btn-group {
+  margin-top: 15px;
+}
+
+#btn-group button, 
+#url-server {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.game-status {
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.color-fae7e0 {
+  fill: #fae7e0;
+}
+
+.color-f9e3ce {
+  fill: #f9e3ce;
+}
+
+.color-f9e3ce text,
+.color-fae7e0 text {
+  fill: black;
+}
+
+.color-f9b37b {
+  fill: #f9b37b;
+}
+
+.color-ed9060 {
+  fill: #ed9060;
+}
+
+.color-ee8068 {
+  fill: #ee8068;
+}
+
+.color-ff5b40 {
+  fill: #ff5b40;
+}
+
+.color-fad177 {
+  fill: #fad177;
+}
+
+.color-f9d067 {
+  fill: #f9d067;
+}
+
+.color-f9ca58 {
+  fill: #f9ca58;
+}
+
+.color-e6bf41 {
+  fill: #e6bf41;
+}
+
+.color-f9c62c {
+  fill: #f9c62c;
+}
+
+.color-f16674 {
+  fill: #f16674;
+}
+
+.color-f14b61 {
+  fill: #f14b61;
+}
+
+.color-f14b61 {
+  fill: #f14b61;
+}
+
+.color-6fb3d9 {
+  fill: #6fb3d9;
+}
+
+.color-f9b37b text {
+  fill: white;
+}
+
+.color-ed9060 text,
+.color-ee8068 text,
+.color-ff5b40 text,
+.color-fad177 text,
+.color-f9d067 text,
+.color-f9ca58 text,
+.color-e6bf41 text,
+.color-f9c62c text,
+.color-f16674 text,
+.color-f14b61 text,
+.color-f14b61 text,
+.color-6fb3d9 text {
+  fill: white;
+}
